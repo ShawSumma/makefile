@@ -21,7 +21,7 @@ run: .dummy $(PROGNAME)
 	./$(PROGNAME)
 
 %.o: %.d %.cpp
-	$(CXX) $(OPT) -c $(^) -o $(@) $(CFLAGS)
+	$(CXX) $(OPT) -c $(@:%.o=%.cpp) -o $(@) $(CXXFLAGS)
 
 %.d: %.cpp
 	$(CXX) $(CXXFLAGS) -MM -MT '$(patsubst %.cpp,%.o,$<)' $< -MF $@
