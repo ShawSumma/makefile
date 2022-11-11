@@ -5,9 +5,7 @@ OPT = -O3
 
 PROGNAME = thing.exe
 
-LIBS=sfml-graphics sfml-window sfml-system
-
-LDFLAGS += $(LIBS:%=-l%)
+LDFLAGS =
 
 DEPS:=$(patsubst %.cpp,%.d,$(SRCS))
 
@@ -27,6 +25,6 @@ run: .dummy $(PROGNAME)
 	$(CXX) $(CXXFLAGS) -MM -MT '$(patsubst %.cpp,%.o,$<)' $< -MF $@
 
 $(PROGNAME): $(SRCS:%.cpp=%.o)
-	$(CXX) $(^) -o $(@) $(pkg-config --libs --cflags sfml-window sfml-system sfml-graphics)
+	$(CXX) $(^) -o $(@) $(pkg-config --libs --cflags sfml-window sfml-system sfml-graphics) $(LDFLAGS)
 
 .dummy:
