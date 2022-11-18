@@ -22,7 +22,7 @@ run: .dummy $(PROGNAME)
 	$(CXX) $(OPT) -c $(@:%.o=%.cpp) -o $(@) $(CXXFLAGS)
 
 %.d: %.cpp
-	$(CXX) $(CXXFLAGS) -MM -MT '$(patsubst %.cpp,%.o,$<)' $< -MF $@
+	$(CXX) $(CXXFLAGS) -MM -MT '$(patsubst %.cpp,%.o,$<)' $(<) -MF $(@)
 
 $(PROGNAME): $(SRCS:%.cpp=%.o)
 	$(CXX) $(^) -o $(@) $(pkg-config --libs --cflags sfml-window sfml-system sfml-graphics) $(LDFLAGS)
